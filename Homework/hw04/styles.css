@@ -1,0 +1,200 @@
+
+.container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 125px auto auto;
+    row-gap: 10px;
+    column-gap: 10px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#navbar{
+    padding: 10px;
+    width: 98%;
+    font-size: x-large;
+    color: Black;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    left: 0;
+    grid-column: 1/3;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+#logout_button{
+    color: blue;
+    border: none;
+    padding-right: 20px;
+    background-color: white;
+}
+.username{
+    padding: 8px;
+    font-size: medium;
+    right: 85px;
+}
+
+body{
+    background-color:aliceblue;
+}
+
+.feed{
+    grid-column: 1/2;
+    background-color: white;
+    margin-left: 10vw;
+}
+
+.feed p{
+    margin-left: 15px;
+}
+
+.recommendations{
+    grid-column: 2/3;
+    grid-row: 1/3;
+    background-color: none;
+    height: 100vh;
+    margin-right: 10vw;
+    position: sticky;
+    top: 0;
+    padding:5px;
+    padding-top: 27px;
+    color: gray;
+    font-size: larger;
+}
+
+.accounts{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    background-color: white;
+    height: 75px;
+    margin-top: 50px;
+    margin-left: 10vw;
+    display: grid;
+    grid-template-rows: 75px;
+    grid-template-columns: 90px 90px 90px 90px 90px 90px;
+
+}
+
+#yourprofile{
+    font-size: xx-large;
+    display: flex;
+    align-items:center;
+    color: black;
+}
+#username{
+    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.profilepictures{
+    border-radius:50%;
+    grid-column: 1/2;
+}
+
+.suggestion{
+    color: black;
+    display: grid;
+    grid-template-columns: 20% auto 20%;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    margin: 15px;
+}
+
+.suggestiontext{
+    color: gray;
+    font-size: medium;
+    grid-column: 2/3;
+}
+
+.accounttext p{
+    margin: 0;
+    padding: 0;
+}
+
+.followbutton{
+    background: none;
+    border: none;
+    color: blue;
+}
+
+.story{
+    font-size: small;
+    display:grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 90px;
+    place-items: center;
+    margin-top: 5px;
+    grid-row: 1/2;
+}
+
+.postbar{
+    display:flex;
+    justify-content: space-between;
+    padding: none;
+    padding-right: 15px;
+    grid-column: 1/2;
+    font-size: large;
+}
+
+.post{
+    display: grid;
+    grid-template-rows: 20px 35px;
+}
+
+.comment{
+    font-size: small;
+    padding-right: 10px;
+    
+}
+#likes{
+    font-size: large;
+}
+
+.icon{
+    border: none;
+    background: none;
+}
+
+.date{
+    color: gray;
+    font-size: small;
+}
+
+.postbar div{
+    display: flex;
+    color: gray;
+    padding-left: 10px;
+    font-size: small;
+}
+
+.postbar button{
+    background: none;
+    border: none;
+}
+
+@media (max-width: 800px){
+    .container{
+     display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 125px auto auto;
+    row-gap: 10px;
+    column-gap: 10px;
+    }
+
+    .recommendations{
+        display: none;
+    }
+    
+    .accounts{
+        margin-left: 0;
+    }
+    
+    .feed{
+        margin-left: 0;
+    }
+}
