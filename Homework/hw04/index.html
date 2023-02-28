@@ -1,164 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- stylesheets and metadata go here -->    
-        <link rel="stylesheet" href="styles.css">
-        <script src="https://kit.fontawesome.com/1d1f9590f6.js" crossorigin="anonymous"></script>
-        <script src="js/main.js" type="module" defer></script>
-        <meta charset = "UTF -8">
-        <meta http-equiv="X-UA-Compatible" content = "IE=edge">
-        <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-        <title>Photo App</title>
-    </head>
-    <div class="container">
-        <nav id="navbar">
-            Photo App
-            <div class="navigation">
-                <span class = "username">gibsonjack</span>
-                <!-- Button Object-->
-                <button id = "logout_button" disabled>
-                    Sign Out
-                </button>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/main.js" defer></script>
+    <title>Photo App</title>
+</head>
+<body>
+
+    <main id="main" aria-hidden="false">
+        <div id="hidingbar">
+        </div>
+        <div id ="navbar">
+            <section class="flexbar">
+               <h2>Photo App</h2>
+               <div class="inner-flexbar">
+                   <button id="logout">Sign Out</button>
+               </div>
+           </section>
+        </div>
+
+        <section id="large-window">
+            <section id="stories">
+                Add all of the stories here...
+            </section>
+
+            <div id="posts">
+                Add all of the posts go here....
             </div>
-        </nav>
-        <body>
-            <!-- HTML content tags go here -->
-            <div class="accounts">
-                <div class="story">
-                    <img class="profilepictures" src="https://picsum.photos/200" width="50">
-                   amandahudson 
-                </div>
-                <div class="story">
-                    <img class="profilepictures" src="https://picsum.photos/200" width="50">
-                   amandahudson 
-                </div>
-                <div class="story">
-                    <img class="profilepictures" src="https://picsum.photos/200" width="50">
-                   amandahudson 
-                </div>
-                <div class="story">
-                    <img class="profilepictures" src="https://picsum.photos/200" width="50">
-                   amandahudson 
-                </div>
-            </div>
-            <div class="feed">
-                <div class="postbar">
-                    <p>Gibsonjack</p>
-                    <p>...</p>
-                </div>
-                <img src="https://picsum.photos/200" width="100%"/>
-                <div class="post">
-                    <div class="postbar">
-                        <div>
-                            <button class="icon"><i class="fa-regular fa-heart"></i></button>
-                            <button class="icon"><i class="fa-regular fa-comment"></i></button>
-                            <button class="icon"><i class="fa-regular fa-paper-plane"></i></button>
-                        </div>
-                        <button class="icon"><i class="fa-regular fa-bookmark"> </i></button>
-                    </div>
-                    <p id="likes">30 likes</p>
-                    <p class ="comment">
-                        <b>amandahudson</b>
-                        This is so stupid. I posted the exact same photo on my account. Are you copying me? Got a crush???
-                    </p>
-                    <p class ="comment">
-                        <b>gibsonjack</b>
-                        More like you have a thing for me! You copied my profile picture!
-                    </p>
-                    <p class ="comment">
-                        <b>amandahudson</b>
-                        U R crazy
-                    </p>
-                    <p class="date">1 DAY AGO</p>
-                    <div class="postbar">
-                        <div>
-                            <button><i class="fa-regular fa-face-smile"></i></button>
-                            <p>Add a comment</p>
-                        </div>
-                        <button class="followbutton">Post</button>
-                    </div>
-                </div>
-            </div>
-            <div class="feed">
-                <div class="postbar">
-                    <p>amandahudson</p>
-                    <p>...</p>
-                </div>
-                <img src="https://picsum.photos/200" width="100%"/>
-                <div class="post">
-                    <div class="postbar">
-                        <div>
-                            <button class="icon"><i class="fa-regular fa-heart"></i></button>
-                            <button class="icon"><i class="fa-regular fa-comment"></i></button>
-                            <button class="icon"><i class="fa-regular fa-paper-plane"></i></button>
-                        </div>
-                        <button class="icon"><i class="fa-regular fa-bookmark"> </i></button>
-                    </div>
-                    <p id="likes">30 likes</p>
-                    <p class ="comment">
-                        <b>gibsonjack</b>
-                        This photo is nothing like mine! What are you talking about???
-                    </p>
-                    <p class ="comment">
-                        <b>amandahudson</b>
-                        They are literally the exact same photo.
-                    </p>
-                    <p class ="comment">
-                        <b>gibsonjack</b>
-                        They are not, and what did you do to make yourself appear all over my suggestions and stories?? I think you are a stalker. I'm beginning to fear for my life!
-                    </p>
-                    <p class="date">21 MINUTES AGO</p>
-                    <div class="postbar">
-                        <div>
-                            <button><i class="fa-regular fa-face-smile"></i></button>
-                            <p>Add a comment</p>
-                        </div>
-                        <button class="followbutton">Post</button>
-                    </div>
-                </div>
-            </div>
-            <div class="recommendations">
-                <div id="yourprofile">
-                    <img class = "profilepictures" src="https://picsum.photos/200" alt="Your Profile" width="75" height="75">
-                    <p id="username">gibsonjack</p>
-                </div>
-                <div id="suggestions">
-                    <p>Suggestions for you</p>
-                    <div class="suggestion">
-                        <img class="profilepictures" src="https://picsum.photos/200" width="50" height="50">
-                        <div class="accounttext">
-                            <p>amandahudson</p>
-                            <p class="suggestiontext">suggested for you</p>
-                        </div>
-                        <button class="followbutton">follow</button>
-                    </div>
-                    <div class="suggestion">
-                        <img class="profilepictures" src="https://picsum.photos/200" width="50" height="50">
-                        <div class="accounttext">
-                            <p>amandahudson</p>
-                            <p class="suggestiontext">suggested for you</p>
-                        </div>
-                        <button class="followbutton">follow</button>
-                    </div>
-                    <div class="suggestion">
-                        <img class="profilepictures" src="https://picsum.photos/200" width="50" height="50">
-                        <div class="accounttext">
-                            <p>amandahudson</p>
-                            <p class="suggestiontext">suggested for you</p>
-                        </div>
-                        <button class="followbutton">follow</button>
-                    </div>
-                    <div class="suggestion">
-                        <img class="profilepictures" src="https://picsum.photos/200" width="50" height="50">
-                        <div class="accounttext">
-                            <p>amandahudson</p>
-                            <p class="suggestiontext">suggested for you</p>
-                        </div>
-                        <button class="followbutton">follow</button>
-                    </div>
-                </div>
-            </div>
-        </body>
-    </div>
+        </section>
+    </main>
+
+    <aside id="aside" aria-hidden="false">
+        <section id="user-profile">Profile goes here...</section>
+        <section id="suggestions">Suggestions go here...</section>
+    </aside>
     
+    <div id="modal-bg" class="modal-bg hidden" aria-hidden="true" role="dialog">
+        <section role="dialog" id="modal" class="modal">
+            <div class="modal-body">
+                Content inside...
+            </div>
+            <button id="close" class="close" onclick="closeModal()" aria-label="Close the modal window">
+                <i class="fa-solid fa-x"></i>
+            </button>
+        </section>
+    </div>
+
+</body>
 </html>
