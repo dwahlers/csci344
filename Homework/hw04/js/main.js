@@ -1,6 +1,8 @@
 // Maximize: shift + ⌘ + [
 // Minimize: shift + ⌘ + ]
 
+//This is a change for GitHub
+
 /********************/
 /* Global Variables */
 /********************/

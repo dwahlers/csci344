@@ -327,9 +327,11 @@ hr{
     aside{
         visibility: hidden;
     }
+
     main{
         width: 98vw;
     }
+    
     #large-window{
         width: 98vw;
     }
