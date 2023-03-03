@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/main.js" defer></script>
+    <title>Photo App</title>
+</head>
+<body>
+
+    <main id="main" aria-hidden="false">
+        <div id="hidingbar">
+        </div>
+        <div id ="navbar">
+            <section class="flexbar">
+               <h2>Photo App</h2>
+               <div class="inner-flexbar">
+                   <button id="logout">Sign Out</button>
+               </div>
+           </section>
+        </div>
+
+        <section id="large-window">
+            <section id="stories">
+                Add all of the stories here...
+            </section>
+
+            <div id="posts">
+                Add all of the posts go here....
+            </div>
+        </section>
+    </main>
+    <aside id="aside" aria-hidden="false">
+        <section id="user-profile">Profile goes here...</section>
+        <section id="suggestions">Suggestions go here...</section>
+    </aside>
+    
+    <div id="modal-bg" class="modal-bg hidden" aria-hidden="true" role="dialog">
+        <section role="dialog" id="modal" class="modal">
+            <div class="modal-body">
+                Content inside...
+            </div>
+            <button id="close" class="close" onclick="closeModal()" aria-label="Close the modal window">
+                <i class="fa-solid fa-x"></i>
+            </button>
+        </section>
+    </div>
+
+</body>
+</html>
