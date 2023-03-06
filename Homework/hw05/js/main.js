@@ -107,7 +107,7 @@ const suggestionsToHTML = suggestion =>{
             <p>${suggestion.username}</p>
             <p class="suggest-text">Suggested For You</p>
         </div>
-        <button aria-label="follow this user">follow</button>
+        <button aria-label="follow this user" onclick="followAccount(${suggestion.id})">follow</button>
     </section>`
 }
 
@@ -120,7 +120,7 @@ const getLikeButton = post =>{
     }
     else{
         return `
-        <button aria-label="like button - liked">
+        <button aria-label="like button - liked" onclick="unlikePost(${post.current_user_like_id}, ${post.id})">
             <i class="fa-solid fa-heart"></i>
         </button>`
     }
@@ -137,22 +137,101 @@ const getLikeCount = post =>{
     }
 }
 
-const likePost = async (postId) =>{
-    const endpoint = `${rootURL}/api/posts/likes`;
-    const postdata = {'post_id': postId};
+const getAccount = async(suggestionId) =>{
+    const endpoint = `${rootURL}/api/suggestions/`;
+    const response = await fetch(endpoint,{
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
 
+    const data = await response.json();
+    console.log("2");
+    console.log('Suggests:', data);
+    var suggestion;
+    for(let i = 0; i < data.length; i++){
+        if(data[i].id == suggestionId){
+            suggestion = data[i];
+        }
+    }
+    console.log("3");
+    console.log('Suggest:', suggestion);
+    return suggestion;
+}
+
+const followAccount = async(suggestionId) =>{
+    const endpoint = `${rootURL}/api/following/`;
+    const suggestion = getAccount(suggestionId);
+    const suggestionData = {
+        'profile': suggestion
+    }
+
+    // Create the bookmark:
     const response = await fetch(endpoint, {
         method: "POST",
         headers: {
-            'Content-Type': 'aplication/json',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         },
-        body: JSON.stringify(postdata)
+        body: JSON.stringify(suggestionData)
     })
-    const data= await response.json();
+    const data = await response.json();
+    console.log('following:', data);
+    //requeryRedraw(suggestionId);
+}
+
+const getFollowing = async() =>{
+    const endpoint = `${rootURL}/api/following/`;
+    const response = await fetch(endpoint,
+        {method: "GET",
+    headers:{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    }})
+    const data = await response.json();
+    console.log('Following:', data);
+}
+
+
+const unlikePost = async (likeId, postId) =>{
+    const endpoint = `${rootURL}/api/posts/likes/${likeId}`;
+
+    // Create the bookmark:
+    const response = await fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    const data = await response.json();
     console.log(data);
     requeryRedraw(postId);
 }
+
+const likePost = async (postId) =>{
+    const endpoint = `${rootURL}/api/posts/likes/`;
+    const postData = {
+        "post_id": postId
+    };
+
+    // Create the bookmark:
+    const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(postData)
+    })
+    const data = await response.json();
+    console.log('likes:', data);
+    requeryRedraw(postId);
+}
+
+
+
 
 const getBookmarkButton = post => {
     if(post.current_user_bookmark_id == undefined){
@@ -163,7 +242,7 @@ const getBookmarkButton = post => {
         </button>`;
     }
     return `
-    <button aria-label:"bookmark button - bookmarked"onclick="unbookmarkPost(${post.current_user_bookmark_id}, ${post.id})"
+    <button aria-label:"bookmark button - bookmarked" onclick="unbookmarkPost(${post.current_user_bookmark_id}, ${post.id})"
     >
         <i class="fa-solid fa-bookmark"></i>
     </button>`;
