@@ -107,9 +107,11 @@ const suggestionsToHTML = suggestion =>{
             <p>${suggestion.username}</p>
             <p class="suggest-text">Suggested For You</p>
         </div>
-        <button aria-label="follow this user" onclick="followAccount(${suggestion.id})">follow</button>
+        <button id="follow${suggestion.id}" aria-label="follow this user" onclick="followAccount(${suggestion.id})">follow</button>
     </section>`
 }
+
+
 
 const getLikeButton = post =>{
     if(post.current_user_like_id == undefined){
@@ -137,34 +139,31 @@ const getLikeCount = post =>{
     }
 }
 
-const getAccount = async(suggestionId) =>{
-    const endpoint = `${rootURL}/api/suggestions/`;
-    const response = await fetch(endpoint,{
-        headers:{
+const comment = async(postId) =>{
+    const comment = document.querySelector(`#comment${postId}`).value;
+    const endpoint = `${rootURL}/api/comments`;
+    const commentData = {
+        'post_id': postId,
+        'text': comment
+    };
+    const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
-        }
+        },
+        body: JSON.stringify(commentData)
     })
-
-    const data = await response.json();
-    console.log("2");
-    console.log('Suggests:', data);
-    var suggestion;
-    for(let i = 0; i < data.length; i++){
-        if(data[i].id == suggestionId){
-            suggestion = data[i];
-        }
-    }
-    console.log("3");
-    console.log('Suggest:', suggestion);
-    return suggestion;
+    const data = await response.json()
+    console.log(data);
+    await requeryRedraw(postId);
+    document.getElementById(`comment${postId}`).focus();
 }
 
 const followAccount = async(suggestionId) =>{
     const endpoint = `${rootURL}/api/following/`;
-    const suggestion = getAccount(suggestionId);
     const suggestionData = {
-        'profile': suggestion
+        'user_id': suggestionId
     }
 
     // Create the bookmark:
@@ -178,21 +177,28 @@ const followAccount = async(suggestionId) =>{
     })
     const data = await response.json();
     console.log('following:', data);
+
     //requeryRedraw(suggestionId);
+    document.querySelector(`#follow${suggestionId}`).innerHTML= `unfollow`;
+    document.querySelector(`#follow${suggestionId}`).setAttribute("onClick", `unfollow(${data.id}, ${suggestionId})`);
+
 }
 
-const getFollowing = async() =>{
-    const endpoint = `${rootURL}/api/following/`;
-    const response = await fetch(endpoint,
-        {method: "GET",
-    headers:{
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-    }})
+const unfollow = async(followId, suggestionId) =>{
+    const endpoint = `${rootURL}/api/following/${followId}`;
+    const response = await fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
     const data = await response.json();
-    console.log('Following:', data);
-}
+    console.log(data);
 
+    document.querySelector(`#follow${suggestionId}`).innerHTML= `follow`;
+    document.querySelector(`#follow${suggestionId}`).setAttribute("onClick", `followAccount(${suggestionId})`);
+}
 
 const unlikePost = async (likeId, postId) =>{
     const endpoint = `${rootURL}/api/posts/likes/${likeId}`;
@@ -361,9 +367,9 @@ const postToHTML = post => {
             <hr>
             <div class="flexbar">
                 <form aria-label="comment text-box" class="comment-box" action="#">
-                    <input type="text" name="comment" placeholder="Add a Comment...">
+                    <input type="text" name="comment" id="comment${post.id}" placeholder="Add a Comment...">
                 </form> 
-                <button aria-label="post button" class="post-button">Post</button>
+                <button aria-label="post button" class="post-button" onclick="comment(${post.id})">Post</button>
             </div>
         </section>
     `
@@ -455,6 +461,26 @@ const getAccessToken = async (rootURL, username, password) => {
     });
     const data = await response.json();
     return data.access_token;
+}
+
+const postComment = async(comment_id, post_id) =>{
+    const comment = document.querySelector(`#${comment_id}`).value;
+    console.log(comment);
+    const endpoint = `${rootURL}/api/comments/`;
+    const commentData = {
+        "post_id": post_id,
+        "text": comment
+    };
+    const response = await fetch(endpoint,{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(commentData)
+    })
+    const data = await response.json();
+    requeryRedraw(post_id);
 }
 
 /**
